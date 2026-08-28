@@ -1,0 +1,107 @@
+// Include theming for Angular Material with `mat.theme()`.
+// This Sass mixin will define CSS variables that are used for styling Angular Material
+// components according to the Material 3 design spec.
+// Learn more about theming and how to use it for your application's
+// custom components at https://material.angular.dev/guide/theming
+@use '@angular/material' as mat;
+
+html {
+  height: 100%;
+  @include mat.theme((color: (primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    ));
+}
+
+body {
+  // Default the application to a light color theme. This can be changed to
+  // `dark` to enable the dark color theme, or to `light dark` to defer to the
+  // user's system settings.
+  color-scheme: light;
+
+  // Set a default background, font and text colors for the application using
+  // Angular Material's system-level CSS variables. Learn more about these
+  // variables at https://material.angular.dev/guide/system-variables
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-body-medium);
+
+  // Reset the user agent margin.
+  margin: 0;
+  height: 100%;
+}
+
+/* You can add global styles to this file, and also import other style files */
+
+/***
+estilização de input material{
+--mat-form-field-container-height: 34px;
+            --mat-form-field-container-vertical-padding: 4px;
+            --mat-form-field-container-text-size: 13px;
+            --mat-form-field-container-text-line-height: 16px;
+            --mat-form-field-outlined-label-text-size: 13px;
+
+            .mat-mdc-form-field-subscript-wrapper {
+                display: none;
+}}
+*/
+
+.markdown-body {
+  line-height: 1.6;
+  overflow-wrap: break-word;
+
+  h1, h2, h3, h4 {
+    margin: 1.2em 0 0.4em;
+    line-height: 1.3;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  p {
+    margin: 0 0 1em;
+  }
+
+  ul, ol {
+    margin: 0 0 1em;
+    padding-left: 1.4em;
+  }
+
+  code {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.9em;
+    background-color: color-mix(in srgb, currentColor 10%, transparent);
+    padding: 0.1em 0.35em;
+    border-radius: 4px;
+  }
+
+  pre {
+    background-color: color-mix(in srgb, currentColor 6%, transparent);
+    padding: 12px;
+    border-radius: 8px;
+    overflow-x: auto;
+
+    code {
+      background: none;
+      padding: 0;
+    }
+  }
+
+  blockquote {
+    margin: 0 0 1em;
+    padding-left: 1em;
+    border-left: 3px solid color-mix(in srgb, currentColor 30%, transparent);
+    opacity: 0.85;
+  }
+
+  a {
+    color: var(--mat-sys-primary);
+  }
+
+  img {
+    max-width: 100%;
+  }
+}

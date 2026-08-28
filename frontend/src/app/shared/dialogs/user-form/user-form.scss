@@ -1,0 +1,19 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    width: min(360px, 100%);
+    box-sizing: border-box;
+
+    mat-form-field {
+        width: 100%;
+    }
+}
+
+.error {
+    color: var(--mat-sys-error);
+    margin: 0 0 8px;
+}
+
+mat-slide-toggle {
+    margin: 8px 0 4px;
+}

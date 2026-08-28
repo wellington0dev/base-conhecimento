@@ -1,0 +1,74 @@
+<main class="main">
+    <button type="button" matButton (click)="goBack()" class="back-link">
+        <i class="bi bi-arrow-left"></i> Voltar
+    </button>
+
+    @if (loading()) {
+    <p>Carregando…</p>
+    } @else if (errorMessage() && !editing()) {
+    <p class="error">{{ errorMessage() }}</p>
+    } @else if (editing()) {
+    <form [formGroup]="form" (ngSubmit)="save()" class="article-form">
+        @if (errorMessage()) {
+        <p class="error">{{ errorMessage() }}</p>
+        }
+
+        <mat-form-field appearance="outline">
+            <mat-label>Título</mat-label>
+            <input matInput formControlName="title" />
+            @if (form.controls.title.hasError('required')) {
+            <mat-error>Informe o título.</mat-error>
+            }
+            @if (form.controls.title.hasError('minlength')) {
+            <mat-error>O título precisa ter ao menos 3 caracteres.</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Categoria</mat-label>
+            <input matInput formControlName="category" placeholder="rede, impressora, internet…" />
+            @if (form.controls.category.hasError('required')) {
+            <mat-error>Informe a categoria.</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Resumo (opcional)</mat-label>
+            <input matInput formControlName="excerpt" placeholder="Se deixar em branco, é gerado a partir do conteúdo" />
+        </mat-form-field>
+
+        <label class="body-label">Conteúdo</label>
+        <app-markdown-editor formControlName="body"></app-markdown-editor>
+        @if (form.controls.body.invalid && form.controls.body.touched) {
+        <p class="field-error">O conteúdo precisa ter ao menos 10 caracteres.</p>
+        }
+
+        <div class="actions">
+            <button type="button" matButton (click)="cancelEditing()">Cancelar</button>
+            <button type="submit" matButton="filled" [disabled]="saving()">
+                {{ isNew() ? 'Publicar' : 'Salvar' }}
+            </button>
+        </div>
+    </form>
+    } @else if (article(); as article) {
+    <article class="article-view">
+        <header>
+            <span class="category-badge">{{ article.category }}</span>
+            <h1>{{ article.title }}</h1>
+            <p class="meta">
+                Criado por {{ article.author.name }}
+                @if (article.lastEditor.id !== article.author.id) {
+                · última edição de {{ article.lastEditor.name }}
+                }
+            </p>
+        </header>
+
+        <div class="markdown-body" [innerHTML]="article.body | markdown"></div>
+
+        <div class="actions">
+            <button type="button" matButton (click)="startEditing()">Editar</button>
+            <button type="button" matButton class="delete" (click)="deleteArticle()">Excluir</button>
+        </div>
+    </article>
+    }
+</main>

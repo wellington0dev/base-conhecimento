@@ -1,0 +1,90 @@
+.main {
+    padding: 20px;
+
+    .toolbar {
+        display: flex;
+        flex-wrap: wrap !important;
+        align-items: center;
+        gap: 8px;
+        row-gap: 8px;
+        border: 1px solid rgba(125, 125, 125, 0.448);
+        border-radius: 10px;
+        padding: 8px;
+        margin-bottom: 20px;
+        --mat-toolbar-standard-height: auto;
+        --mat-toolbar-mobile-height: auto;
+
+        .toolbar-spacer {
+            flex: 1 1 auto;
+        }
+
+        @media (max-width: 480px) {
+            .toolbar-spacer {
+                flex-basis: 100%;
+                height: 0;
+            }
+
+            button[matButton="filled"] {
+                width: 100%;
+            }
+        }
+
+        .search-input {
+            flex: 1 1 160px;
+            min-width: 0;
+            height: 28px;
+            padding: 0 10px;
+            border: 1px solid rgba(125, 125, 125, 0.448);
+            border-radius: 6px;
+            font: inherit;
+            font-size: 13px;
+            color: inherit;
+            background-color: var(--mat-sys-surface);
+            outline: none;
+
+            &:focus {
+                border-color: var(--mat-sys-primary);
+            }
+
+            &::placeholder {
+                color: currentColor;
+                opacity: 0.6;
+            }
+        }
+    }
+
+    .user-list {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 20px;
+
+        .user-card {
+            width: 200px;
+            overflow-wrap: anywhere;
+
+            .icon {
+                font-size: 50px;
+                margin: 10px auto;
+            }
+
+            mat-card-content {
+                text-align: center;
+            }
+
+            .badge-inactive {
+                display: inline-block;
+                margin: 4px auto 0;
+                padding: 2px 8px;
+                border-radius: 999px;
+                font-size: 11px;
+                background-color: color-mix(in srgb, var(--mat-sys-error) 16%, transparent);
+                color: var(--mat-sys-error);
+            }
+        }
+
+        .empty-state {
+            opacity: 0.7;
+        }
+    }
+}

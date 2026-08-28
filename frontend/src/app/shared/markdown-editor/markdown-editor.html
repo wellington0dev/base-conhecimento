@@ -1,0 +1,42 @@
+<div class="editor">
+  <div class="toolbar">
+    <button type="button" matIconButton (click)="bold()" title="Negrito" [disabled]="disabled()">
+      <i class="bi bi-type-bold"></i>
+    </button>
+    <button type="button" matIconButton (click)="italic()" title="Itálico" [disabled]="disabled()">
+      <i class="bi bi-type-italic"></i>
+    </button>
+    <button type="button" matIconButton (click)="heading()" title="Título" [disabled]="disabled()">
+      <i class="bi bi-type-h2"></i>
+    </button>
+    <button type="button" matIconButton (click)="list()" title="Lista" [disabled]="disabled()">
+      <i class="bi bi-list-ul"></i>
+    </button>
+    <button type="button" matIconButton (click)="code()" title="Código" [disabled]="disabled()">
+      <i class="bi bi-code-slash"></i>
+    </button>
+    <button type="button" matIconButton (click)="link()" title="Link" [disabled]="disabled()">
+      <i class="bi bi-link-45deg"></i>
+    </button>
+
+    <span class="spacer"></span>
+
+    <button type="button" matButton (click)="togglePreview()">
+      {{ showPreview() ? 'Editar' : 'Pré-visualizar' }}
+    </button>
+  </div>
+
+  @if (showPreview()) {
+    <div class="preview markdown-body" [innerHTML]="value() | markdown"></div>
+  } @else {
+    <textarea
+      #textarea
+      class="body-input"
+      [value]="value()"
+      [disabled]="disabled()"
+      (input)="onInput($any($event.target).value)"
+      (blur)="markTouched()"
+      placeholder="Escreva o conteúdo aqui. Use os botões acima pra formatar sem precisar saber markdown."
+    ></textarea>
+  }
+</div>

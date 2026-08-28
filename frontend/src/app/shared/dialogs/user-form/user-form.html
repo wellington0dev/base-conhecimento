@@ -1,0 +1,62 @@
+<h2 mat-dialog-title>{{ isEdit ? 'Editar usuário' : 'Adicionar usuário' }}</h2>
+
+<form [formGroup]="form" (ngSubmit)="save()">
+  <mat-dialog-content class="content">
+    @if (errorMessage()) {
+      <p class="error">{{ errorMessage() }}</p>
+    }
+
+    <mat-form-field appearance="outline">
+      <mat-label>Nome</mat-label>
+      <input matInput formControlName="name" />
+      @if (form.controls.name.hasError('required')) {
+        <mat-error>Informe o nome.</mat-error>
+      }
+      @if (form.controls.name.hasError('minlength')) {
+        <mat-error>O nome precisa ter ao menos 2 caracteres.</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username" />
+      @if (form.controls.username.hasError('required')) {
+        <mat-error>Informe o username.</mat-error>
+      }
+      @if (form.controls.username.hasError('minlength')) {
+        <mat-error>O username precisa ter ao menos 3 caracteres.</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>{{ isEdit ? 'Nova senha (opcional)' : 'Senha' }}</mat-label>
+      <input matInput type="password" formControlName="password" />
+      @if (form.controls.password.hasError('required')) {
+        <mat-error>Informe a senha.</mat-error>
+      }
+      @if (form.controls.password.hasError('minlength')) {
+        <mat-error>A senha precisa ter ao menos 6 caracteres.</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Papel</mat-label>
+      <mat-select formControlName="role">
+        <mat-option value="intern">Estagiário</mat-option>
+        <mat-option value="employee">Funcionário contratado</mat-option>
+        <mat-option value="admin">Administrador</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    @if (isEdit) {
+      <mat-slide-toggle formControlName="active">Usuário ativo</mat-slide-toggle>
+    }
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button matButton type="button" (click)="close()">Cancelar</button>
+    <button matButton="filled" type="submit" [disabled]="saving()">
+      {{ isEdit ? 'Salvar' : 'Adicionar' }}
+    </button>
+  </mat-dialog-actions>
+</form>

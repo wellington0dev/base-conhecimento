@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Excluir artigo</h2>
+<mat-dialog-content>
+  @if (errorMessage()) {
+    <p class="error">{{ errorMessage() }}</p>
+  }
+  <p>
+    Tem certeza que deseja excluir <strong>{{ article.title }}</strong>?
+    Essa ação não pode ser desfeita.
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button matButton (click)="close()">Cancelar</button>
+  <button matButton="filled" class="confirm" (click)="confirm()" [disabled]="deleting()" cdkFocusInitial>
+    Excluir
+  </button>
+</mat-dialog-actions>

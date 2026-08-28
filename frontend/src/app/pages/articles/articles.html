@@ -1,0 +1,44 @@
+<main class="main">
+    <mat-toolbar class="toolbar">
+        <button type="button" matIconButton class="search-icon" aria-label="Buscar">
+            <i class="bi bi-search"></i>
+        </button>
+        <input
+            type="text"
+            class="search-input"
+            placeholder="Buscar por título ou categoria"
+            [value]="searchTerm()"
+            (input)="onSearch($any($event.target).value)"
+        />
+
+        <span class="toolbar-spacer"></span>
+
+        <button matButton="filled" (click)="createArticle()">
+            <i class="bi bi-plus-lg"></i> Novo artigo
+        </button>
+    </mat-toolbar>
+
+    <div class="article-list">
+        @if (filteredArticles().length > 0) {
+        @for (article of filteredArticles(); track article.id) {
+        <mat-card class="article-card" appearance="outlined" (click)="openArticle(article)">
+            <mat-card-header>
+                <mat-card-title>{{ article.title }}</mat-card-title>
+                <mat-card-subtitle>{{ article.category }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <p class="excerpt">{{ article.excerpt }}</p>
+                <p class="meta">
+                    Por {{ article.author.name }}
+                    @if (article.lastEditor.id !== article.author.id) {
+                    · última edição de {{ article.lastEditor.name }}
+                    }
+                </p>
+            </mat-card-content>
+        </mat-card>
+        }
+        } @else {
+        <p class="empty-state">Nenhum artigo encontrado.</p>
+        }
+    </div>
+</main>

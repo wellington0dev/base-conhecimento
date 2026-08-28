@@ -1,0 +1,13 @@
+<mat-toolbar class="toolbar">
+  <span class="brand">Supertec</span>
+
+  <span class="toolbar-spacer"></span>
+
+  <div class="nav-links">
+    <a mat-button class="nav-link" routerLink="/articles" routerLinkActive="active-link">Artigos</a>
+    @if (isAdmin) {
+      <a mat-button class="nav-link" routerLink="/users" routerLinkActive="active-link">Usuários</a>
+    }
+  </div>
+  <button (click)="logout()" mat-button="filled" class="logout">Sair</button>
+</mat-toolbar>
